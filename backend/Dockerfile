@@ -26,4 +26,4 @@ COPY --from=builder /app/ecosystem.config.js ./
 
 EXPOSE 3000
 
-CMD ["pm2-runtime", "dist/main.js"]
+CMD ["pm2-runtime", "ecosystem.config.js"]
