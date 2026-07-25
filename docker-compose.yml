@@ -1,0 +1,43 @@
+version: "3.9"
+
+services:
+  database:
+    container_name: kupipodariday-db
+
+    image: postgres:16-alpine
+
+    env_file:
+      - .env
+
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  backend:
+    container_name: kupipodariday-backend
+
+    build:
+      context: ./backend
+
+    env_file:
+      - ./backend/.env
+
+    ports:
+      - "4000:3000"
+
+    depends_on:
+      - database
+
+  frontend:
+    container_name: kupipodariday-frontend
+
+    build:
+      context: ./frontend
+
+    ports:
+      - "8081:80"
+
+    depends_on:
+      - backend
+
+volumes:
+  postgres_data:
