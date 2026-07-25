@@ -6,6 +6,14 @@ import { ValidationPipe } from '@nestjs/common';
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
+    app.enableCors({
+        origin: [
+            'https://kpd.students.nomorepartiessite.ru',
+            'http://localhost:3000',
+        ],
+        credentials: true,
+    });
+
   const config = new DocumentBuilder()
     .setTitle('KupiPodariDay API')
     .setDescription('Документация сервиса КупиПодариДай')
